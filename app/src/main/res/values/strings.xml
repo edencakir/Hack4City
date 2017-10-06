@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Smyrna App</string>
+    <string name="channel_name">App</string>
+    <string name="channel_description">Fazla mı Bekliyorsunuz?</string>
+</resources>
