@@ -36,7 +36,7 @@ const MainScreenNavigator = TabNavigator(
     tabBarOptions: {
       tabStyle: {
         backgroundColor: '#ececec',
-        flexDirection: 'row'
+        flexDirection: Platform.select({ android: 'row', ios: 'column' })
       },
       style: {
         backgroundColor: 'white'
