@@ -91,6 +91,7 @@ export default class Home extends Component {
             {this.state.status}
           </Text>
           <TouchableOpacity
+            activeOpacity={1}
             onPress={this.scanBeacons}
             style={{
               width: 160,
