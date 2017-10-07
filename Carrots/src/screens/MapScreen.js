@@ -11,9 +11,9 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import TabBarIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MapView from 'react-native-maps';
-import { GOOGLE_MAPS_API_KEY } from '../assets/Constants';
+import { GOOGLE_MAPS_API_KEY } from '../utility/Constants';
 
-export const getRouteURL = (org, dest) => {
+const getRouteURL = (org, dest) => {
   const mode = 'driving'; // 'walking';
   const origin = '38.457952,27.0890082';
   const destination = '38.4541002,27.1991632';
