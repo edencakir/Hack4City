@@ -29,6 +29,12 @@
        };
        map = new google.maps.Map(document.getElementById("map-canvas"),
            mapOptions);
+
+       var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(38.4350402, 27.1685797),
+        icon: 'https://mt.googleapis.com/vt/icon/name=icons/onion/25-bus.png',
+        map: map
+       });
      }
 
      google.maps.event.addDomListener(window, 'load', initialize);
