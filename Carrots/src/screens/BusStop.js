@@ -10,26 +10,34 @@ import {
   Dimensions
 } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { getDestination } from '../store/app/actions';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TabBarIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import busStop from '../assets/img/busstop.jpg';
 
-export default class BusStop extends Component {
+class BusStop extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.title,
     tabBarIcon: ({ tintColor }) => (
-      <TabBarIcon name={'route'} size={20} style={{}} color={tintColor} />
+      <TabBarIcon name={'routes'} size={20} style={{}} color={tintColor} />
     )
   });
 
   state = {
-    locationSelected: false
+    locationSelected: false,
+    destination: { lat: 0, lng: 0 }
   };
 
-  onLocationSelect = () => {
+  onLocationSelect = (data, details) => {
     this.setState({
-      locationSelected: true
+      locationSelected: true,
+      destination: {
+        lat: details.geometry.location.lat,
+        lng: details.geometry.location.lng
+      }
     });
+    this.props.getDestination(this.state.destination);
   };
 
   renderSearch = () => (
@@ -86,18 +94,15 @@ export default class BusStop extends Component {
   renderDestination = () => (
     <View style={styles.row}>
       <TouchableOpacity
-        style={[styles.buttonTransit, { backgroundColor: 'darkblue' }]}
-      >
+        style={[styles.buttonTransit, { backgroundColor: 'darkblue' }]}>
         <Icon size={24} color={'white'} name={'md-bus'} />
       </TouchableOpacity>
       <TouchableOpacity
-        style={[styles.buttonTransit, { backgroundColor: 'orange' }]}
-      >
+        style={[styles.buttonTransit, { backgroundColor: 'orange' }]}>
         <Icon size={24} color={'white'} name={'md-car'} />
       </TouchableOpacity>
       <TouchableOpacity
-        style={[styles.buttonTransit, { backgroundColor: 'pink' }]}
-      >
+        style={[styles.buttonTransit, { backgroundColor: 'pink' }]}>
         <Icon size={24} color={'white'} name={'md-bicycle'} />
       </TouchableOpacity>
     </View>
@@ -142,3 +147,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+const mapToState = ({ appReducer }) => ({
+  destination: appReducer.destination
+});
+
+export default connect(mapToState, { getDestination })(BusStop);
