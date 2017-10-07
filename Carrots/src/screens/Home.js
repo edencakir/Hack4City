@@ -32,7 +32,7 @@ export default class Home extends Component {
       this.setState({
         scanning: false
       });
-      this.props.navigation.navigate('BusStop', {
+      this.props.navigation.navigate('TabBar', {
         title: 'Bostanlı'
       });
     }, 1000);
@@ -87,8 +87,7 @@ export default class Home extends Component {
       <View style={styles.container}>
         <Animated.View style={{ alignItems: 'center', top: -20 }}>
           <Text
-            style={{ margin: 16, fontSize: 24, fontFamily: 'HelveticaNeue' }}
-          >
+            style={{ margin: 16, fontSize: 24, fontFamily: 'HelveticaNeue' }}>
             {this.state.status}
           </Text>
           <TouchableOpacity
@@ -100,8 +99,7 @@ export default class Home extends Component {
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: 'lightblue'
-            }}
-          >
+            }}>
             {this.state.scanning ? (
               <ActivityIndicator color={'white'} size={'large'} />
             ) : (
