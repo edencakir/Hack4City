@@ -10,26 +10,59 @@ import {
   Dimensions
 } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import Icon from 'react-native-vector-icons/Ionicons';
-import TabBarIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import DirectionIcon from 'react-native-vector-icons/Ionicons';
 import busStop from '../assets/img/busstop.jpg';
+import konak from '../assets/img/konak.jpg';
 
 export default class BusStop extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.title,
     tabBarIcon: ({ tintColor }) => (
-      <TabBarIcon name={'route'} size={20} style={{}} color={tintColor} />
+      <Icon name={'routes'} size={20} style={{}} color={tintColor} />
     )
   });
 
   state = {
     locationSelected: false
   };
+  routes = [
+    {
+      iconName: 'bus',
+      title: 'Otobüs',
+      color: 'blue',
+      target: 'bus',
+      description: 'Sizin için en hızlı ulaşım yolu ancak vasıta kalabalık.'
+    },
+    {
+      iconName: 'tram',
+      title: 'Tramvay',
+      color: 'orange',
+      target: 'tram',
+      description: 'Yavaş ve sarsıntısız bir yolculuk.'
+    },
+    {
+      iconName: 'bike',
+      title: 'Bisiklet',
+      color: 'green',
+      target: 'bike',
+      description: 'Sağlıklı yaşam!'
+    },
+    {
+      iconName: 'train',
+      title: 'İzban',
+      color: 'red',
+      target: 'train',
+      description:
+        'İstasyona gidişiniz 15 dakika, vardığınızda tren çok geçmeden gelmiş olacak.'
+    }
+  ];
 
   onLocationSelect = () => {
     this.setState({
       locationSelected: true
     });
+    this.props.navigation.setParams({ title: 'Bostanlı - Konak' });
   };
 
   renderSearch = () => (
@@ -83,31 +116,68 @@ export default class BusStop extends Component {
     />
   );
 
-  renderDestination = () => (
-    <View style={styles.row}>
-      <TouchableOpacity
-        style={[styles.buttonTransit, { backgroundColor: 'darkblue' }]}
-      >
-        <Icon size={24} color={'white'} name={'md-bus'} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.buttonTransit, { backgroundColor: 'orange' }]}
-      >
-        <Icon size={24} color={'white'} name={'md-car'} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.buttonTransit, { backgroundColor: 'pink' }]}
-      >
-        <Icon size={24} color={'white'} name={'md-bicycle'} />
-      </TouchableOpacity>
-    </View>
-  );
+  renderImages = () => {
+    const { locationSelected } = this.state;
+    if (locationSelected) {
+      return (
+        <View style={{ flexDirection: 'row' }}>
+          <Image
+            source={busStop}
+            style={[
+              styles.stopImage,
+              { width: Dimensions.get('window').width / 2 }
+            ]}
+          />
+          <Image
+            source={konak}
+            style={[
+              styles.stopImage,
+              { width: Dimensions.get('window').width / 2 }
+            ]}
+          />
+        </View>
+      );
+    }
+    return <Image source={busStop} style={styles.stopImage} />;
+  };
+
+  renderDestination = () => {
+    return this.routes.map((route, index) => (
+      <View style={{}} key={index}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() =>
+            this.props.navigation.navigate('VehicleStatus', {
+              vehicleStatusTitle: route.title
+            })}
+          style={styles.buttonTransit}
+        >
+          <Icon name={route.iconName} color={'grey'} size={28} />
+          <View style={{ marginLeft: 12, marginRight: 8, flex: 1 }}>
+            <Text style={styles.textTransit}>{route.title}</Text>
+            <Text style={styles.descriptionTransit}>{route.description}</Text>
+          </View>
+          <DirectionIcon name={'ios-arrow-forward'} color={'grey'} size={28} />
+        </TouchableOpacity>
+        {this.routes.length - 1 === index ? (
+          <View />
+        ) : (
+          <View
+            style={{
+              backgroundColor: 'lightgrey',
+              height: StyleSheet.hairlineWidth
+            }}
+          />
+        )}
+      </View>
+    ));
+  };
 
   render() {
     const { locationSelected } = this.state;
     return (
       <View style={styles.container}>
-        <Image source={busStop} style={styles.stopImage} />
+        {this.renderImages()}
         {/*<Text style={styles.header}>Gitmek İstediğiniz Konum</Text>*/}
         {locationSelected ? this.renderDestination() : this.renderSearch()}
       </View>
@@ -130,12 +200,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   buttonTransit: {
-    width: 60,
-    height: 60,
-    backgroundColor: 'red',
-    borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center'
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16
+  },
+  textTransit: {
+    fontWeight: 'bold',
+    fontSize: 14
+  },
+  descriptionTransit: {
+    marginTop: 1,
+    fontSize: 12
   },
   row: {
     flexDirection: 'row',

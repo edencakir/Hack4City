@@ -11,12 +11,14 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import TabBarIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default class MapScreen extends Component {
+export default class VehicleStatus extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Harita',
+    title: navigation.state.params.vehicleStatusTitle,
     tabBarIcon: ({ tintColor }) => (
-      <TabBarIcon name={'map'} size={20} style={{}} color={tintColor} />
-    )
+      <TabBarIcon name={'routes'} size={20} style={{}} color={tintColor} />
+    ),
+    headerBackTitle: 'Geri',
+    headerTruncatedBackTitle: 'Geri'
   });
 
   state = {};
@@ -24,7 +26,7 @@ export default class MapScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>MapScreen</Text>
+        <Text>VehicleStatus</Text>
       </View>
     );
   }
