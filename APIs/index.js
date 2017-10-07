@@ -4,7 +4,10 @@ var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 
 var DURAK_COLLECTION = "durakCollection";
+
 var IZBAN_COLLECTION = "izbanCollection";
+
+var METRO_COLLECTION = "metroCollection";
 
 var app = express();
 app.use(bodyParser.json());
@@ -66,6 +69,48 @@ app.post("/api/durak", function(req, res) {
   });
 });
 
+app.delete("/api/durak/:id", function(req, res) {
+  db.collection(DURAK_COLLECTION).remove({id: parseInt(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete contact");
+    } else {
+      res.status(200).json(req.params.id);
+    }
+  });
+});
+
+app.get("/api/metro", function(req, res) {
+  db.collection(METRO_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get contacts.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.post("/api/metro", function(req, res) {
+  var newContact = req.body;
+  newContact.createDate = new Date();
+
+  db.collection(METRO_COLLECTION).insertOne(newContact, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to create new contact.");
+    } else {
+      res.status(201).json(doc.ops[0]);
+    }
+  });
+});
+
+app.delete("/api/metro/:id", function(req, res) {
+  db.collection(METRO_COLLECTION).remove({id: parseInt(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete contact");
+    } else {
+      res.status(200).json(req.params.id);
+    }
+  });
+});
 
 app.get("/api/izban", function(req, res) {
   db.collection(IZBAN_COLLECTION).find({}).toArray(function(err, docs) {
@@ -86,6 +131,16 @@ app.post("/api/izban", function(req, res) {
       handleError(res, err.message, "Failed to create new contact.");
     } else {
       res.status(201).json(doc.ops[0]);
+    }
+  });
+});
+
+app.delete("/api/izban/:id", function(req, res) {
+  db.collection(IZBAN_COLLECTION).remove({id: parseInt(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete contact");
+    } else {
+      res.status(200).json(req.params.id);
     }
   });
 });

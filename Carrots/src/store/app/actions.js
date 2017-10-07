@@ -1,8 +1,7 @@
 import * as types from '../types';
 
-export const getDestination = destination => dispatch => {
+export const getDestination = destination => dispatch =>
   dispatch({
-    type: types.GET_LOCATION,
+    type: types.GET_DESTINATION,
     destination
   });
-};

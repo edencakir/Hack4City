@@ -62,6 +62,7 @@ class BusStop extends Component {
   ];
 
   onLocationSelect = (data, details) => {
+    const { navigation, getDestination } = this.props;
     this.setState({
       locationSelected: true,
       destination: {
@@ -69,8 +70,11 @@ class BusStop extends Component {
         lng: details.geometry.location.lng
       }
     });
-    this.props.navigation.setParams({ title: 'Bostanlı - Konak' });
-    this.props.getDestination(this.state.destination);
+    navigation.setParams({ title: 'Bostanlı - Konak' });
+    getDestination({
+      lat: details.geometry.location.lat,
+      lng: details.geometry.location.lng
+    });
   };
 
   renderSearch = () => (
@@ -232,8 +236,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapToState = ({ appReducer }) => ({
-  destination: appReducer.destination
-});
-
-export default connect(mapToState, { getDestination })(BusStop);
+export default connect(null, { getDestination })(BusStop);
