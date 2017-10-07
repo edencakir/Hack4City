@@ -11,12 +11,9 @@
         Background="White" Loaded="WindowLoaded"
         GlowBrush="{DynamicResource AccentColorBrush}">
 
-    <Grid Name="Grid" Focusable="True" ShowGridLines="False" Margin="0,154,0,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="135*"/>
-            <ColumnDefinition Width="653*"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock Text="Carrots ile 'gerçek' zaman." FontSize="39" FontFamily="Segoe UI Light" Margin="8,-118,337,473" Grid.ColumnSpan="2" />
-        <cefSharp:ChromiumWebBrowser Grid.Row="0" Address="file://C:\\Users\\DeLL\\Desktop\\Hack4City\\CentralDashboard\\CentralDashboard\\Maps.html" Grid.ColumnSpan="2" />
+    <Grid Name="Grid" Focusable="True" ShowGridLines="False">
+        <Image Source="Logo.jpg" Margin="10,10,707,496" />
+        <TextBlock Text="Carrots ile 'gerçek' zaman." FontSize="39" FontFamily="Segoe UI Light" Margin="95,2,230,494" />
+        <cefSharp:ChromiumWebBrowser Grid.Row="0" Address="file://C:\\Users\\DeLL\\Desktop\\Hack4City\\Dashboards\\CentralDashboard\\CentralDashboard\\Maps.html" Margin="0,241,0,0" />
     </Grid>
 </Controls:MetroWindow>
