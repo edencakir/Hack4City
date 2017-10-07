@@ -7,7 +7,6 @@ import {
   DeviceEventEmitter,
   TouchableOpacity,
   ActivityIndicator,
-  Animated,
   Dimensions,
   Platform
 } from 'react-native';
@@ -20,9 +19,7 @@ export default class Home extends Component {
   };
 
   state = {
-    scanning: false,
-    status: 'Durağa Geldim'
-    //top: new Animated.Value(Dimensions.get('window').height / 2 - 150)
+    scanning: false
   };
 
   componentDidMount() {}
@@ -47,8 +44,7 @@ export default class Home extends Component {
     this.setState({ scanning: true, status: 'Durak Aranıyor' });
     setTimeout(() => {
       this.setState({
-        scanning: false,
-        status: 'Durağa Geldim'
+        scanning: false
       });
       this.props.navigation.navigate('TabBar', {
         title: 'Bostanlı'
@@ -92,8 +88,7 @@ export default class Home extends Component {
   onBeaconRange = data => {
     console.log(data);
     this.setState({
-      scanning: false,
-      status: 'Durağa Geldim'
+      scanning: false
     });
     if (
       (data.beacons && data.beacons[0] && data.beacons[0].uuid) ===
@@ -119,7 +114,7 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Animated.View style={{ alignItems: 'center', top: -20 }}>
+        <View style={{ alignItems: 'center', top: -20 }}>
           <TouchableOpacity
             activeOpacity={1}
             onPress={this.scanBeacons}
@@ -138,7 +133,7 @@ export default class Home extends Component {
               <Icon name={'md-pin'} size={54} color={'orange'} />
             )}
           </TouchableOpacity>
-        </Animated.View>
+        </View>
       </View>
     );
   }
