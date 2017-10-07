@@ -21,6 +21,7 @@ export default class Home extends Component {
   state = {
     scanning: false
   };
+  processing = false;
 
   componentDidMount() {}
 
@@ -42,14 +43,6 @@ export default class Home extends Component {
 
   scanBeacons = () => {
     this.setState({ scanning: true, status: 'Durak Aranıyor' });
-    setTimeout(() => {
-      this.setState({
-        scanning: false
-      });
-      this.props.navigation.navigate('TabBar', {
-        title: 'Bostanlı'
-      });
-    }, 100);
     //Animated.timing(this.state.top, {
     //  toValue: 20
     //}).start();
@@ -95,7 +88,9 @@ export default class Home extends Component {
         'e20a39f4-73f5-4bc4-a12f-17d1ad07a961' ||
       data.uuid === 'e20a39f4-73f5-4bc4-a12f-17d1ad07a961'
     ) {
-      // console.log('success');
+      console.log('success');
+      this.processing = true;
+      this.setState;
     }
     // data.region - The current region
     // data.region.identifier
