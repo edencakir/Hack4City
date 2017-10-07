@@ -92,6 +92,7 @@ export default class Home extends Component {
         var headers = new Headers();
         headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/json');
+
         fetch(BASE_URL + '/api/durak', {
           method: 'POST',
           headers,
