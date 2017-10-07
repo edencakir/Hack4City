@@ -9,13 +9,13 @@ import {
   Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import TabBarIcon from 'react-native-vector-icons/FontAwesome';
+import TabBarIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class ShipStop extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.title,
     tabBarIcon: ({ tintColor }) => (
-      <TabBarIcon name={'ship'} size={22} style={{}} />
+      <TabBarIcon name={'ferry'} size={20} style={{}} color={tintColor} />
     )
   });
 

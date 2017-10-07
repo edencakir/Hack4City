@@ -17,7 +17,7 @@ export default class BusStop extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.title,
     tabBarIcon: ({ tintColor }) => (
-      <TabBarIcon name={'bus'} size={22} style={{}} />
+      <TabBarIcon name={'bus'} size={20} style={{}} color={tintColor} />
     )
   });
 

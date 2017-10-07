@@ -3,6 +3,7 @@ import Home from './screens/Home';
 import MetroStop from './screens/MetroStop';
 import BusStop from './screens/BusStop';
 import ShipStop from './screens/ShipStop';
+import TramStop from './screens/TramStop';
 import {
   StackNavigator,
   TabNavigator,
@@ -27,17 +28,24 @@ const ThirdTab = StackNavigator({
   }
 });
 
+const FourthTab = StackNavigator({
+  Tram: {
+    screen: TramStop
+  }
+});
+
 const MainScreenNavigator = TabNavigator(
   {
     FirstTab: { screen: FirstTab },
     SecondTab: { screen: SecondTab },
-    ThirdTab: { screen: ThirdTab }
+    ThirdTab: { screen: ThirdTab },
+    FourthTab: { screen: FourthTab }
   },
   {
     tabBarOptions: {
       activeBackgroundColor: 'orange',
       inactiveBackgroundColor: 'black',
-      activeTintColor: 'red',
+      activeTintColor: 'black',
       inactiveTintColor: 'white',
       showIcon: true
     }
@@ -54,6 +62,10 @@ SecondTab.navigationOptions = {
 
 ThirdTab.navigationOptions = {
   title: 'Vapur'
+};
+
+FourthTab.navigationOptions = {
+  title: 'Tramvay'
 };
 
 const MainStack = StackNavigator(

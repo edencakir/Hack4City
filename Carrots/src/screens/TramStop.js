@@ -11,11 +11,15 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import TabBarIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default class MetroStop extends Component {
+export default class TramStop extends Component {
   static navigationOptions = ({ navigation }) => ({
+    headerStyle: {
+      backgroundColor: 'black'
+    },
+    headerTitleStyle: { color: 'white' },
     title: navigation.state.params.title,
     tabBarIcon: ({ tintColor }) => (
-      <TabBarIcon name={'train'} size={20} style={{}} color={tintColor} />
+      <TabBarIcon name={'tram'} size={20} style={{}} color={tintColor} />
     )
   });
 
@@ -24,7 +28,7 @@ export default class MetroStop extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>MetroStop</Text>
+        <Text>TramStop</Text>
       </View>
     );
   }
