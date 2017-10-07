@@ -30,7 +30,8 @@ export default class Home extends Component {
     this.setState({ scanning: true, status: 'Durak Aranıyor' });
     setTimeout(() => {
       this.setState({
-        scanning: false
+        scanning: false,
+        status: 'Durağa Geldim'
       });
       this.props.navigation.navigate('TabBar', {
         title: 'Bostanlı'
@@ -87,7 +88,8 @@ export default class Home extends Component {
       <View style={styles.container}>
         <Animated.View style={{ alignItems: 'center', top: -20 }}>
           <Text
-            style={{ margin: 16, fontSize: 24, fontFamily: 'HelveticaNeue' }}>
+            style={{ margin: 16, fontSize: 24, fontFamily: 'HelveticaNeue' }}
+          >
             {this.state.status}
           </Text>
           <TouchableOpacity
@@ -100,7 +102,8 @@ export default class Home extends Component {
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: 'lightblue'
-            }}>
+            }}
+          >
             {this.state.scanning ? (
               <ActivityIndicator color={'white'} size={'large'} />
             ) : (

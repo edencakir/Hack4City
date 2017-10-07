@@ -1,9 +1,8 @@
 import React from 'react';
 import Home from './screens/Home';
-import MetroStop from './screens/MetroStop';
+import MapScreen from './screens/MapScreen';
 import BusStop from './screens/BusStop';
-import ShipStop from './screens/ShipStop';
-import TramStop from './screens/TramStop';
+
 import {
   StackNavigator,
   TabNavigator,
@@ -17,55 +16,34 @@ const FirstTab = StackNavigator({
 });
 
 const SecondTab = StackNavigator({
-  Metro: {
-    screen: MetroStop
-  }
-});
-
-const ThirdTab = StackNavigator({
-  Ship: {
-    screen: ShipStop
-  }
-});
-
-const FourthTab = StackNavigator({
-  Tram: {
-    screen: TramStop
+  Map: {
+    screen: MapScreen,
+    title: 'Harita'
   }
 });
 
 const MainScreenNavigator = TabNavigator(
   {
     FirstTab: { screen: FirstTab },
-    SecondTab: { screen: SecondTab },
-    ThirdTab: { screen: ThirdTab },
-    FourthTab: { screen: FourthTab }
+    SecondTab: { screen: SecondTab }
   },
   {
     tabBarOptions: {
-      activeBackgroundColor: 'orange',
-      inactiveBackgroundColor: 'black',
-      activeTintColor: 'black',
-      inactiveTintColor: 'white',
+      activeBackgroundColor: 'white',
+      inactiveBackgroundColor: '#ececec',
+      activeTintColor: 'orange',
+      inactiveTintColor: 'grey',
       showIcon: true
     }
   }
 );
 
 FirstTab.navigationOptions = {
-  title: 'Otobüs'
+  title: 'Rota'
 };
 
 SecondTab.navigationOptions = {
-  title: 'Metro'
-};
-
-ThirdTab.navigationOptions = {
-  title: 'Vapur'
-};
-
-FourthTab.navigationOptions = {
-  title: 'Tramvay'
+  title: 'Harita'
 };
 
 const MainStack = StackNavigator(
