@@ -6,7 +6,6 @@ import com.facebook.react.ReactApplication;
 import com.mackentoch.beaconsandroid.BeaconsAndroidPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.airbnb.android.react.maps.MapsPackage;
-import com.polidea.reactnativeble.BlePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -29,8 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new BeaconsAndroidPackage(),
             new VectorIconsPackage(),
-            new MapsPackage(),
-            new BlePackage()
+            new MapsPackage()
       );
     }
 
