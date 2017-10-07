@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TabBarIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MapView from 'react-native-maps';
-import { GOOGLE_MAPS_API_KEY } from '../assets/Constants';
+import { GOOGLE_MAPS_API_KEY } from '../utility/Constants';
 
 export const decode = function(t, e) {
   for (
