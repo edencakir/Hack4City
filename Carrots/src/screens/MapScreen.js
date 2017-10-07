@@ -13,9 +13,9 @@ import TabBarIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class MetroStop extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.title,
+    title: 'Harita',
     tabBarIcon: ({ tintColor }) => (
-      <TabBarIcon name={'train'} size={20} style={{}} color={tintColor} />
+      <TabBarIcon name={'map'} size={20} style={{}} color={tintColor} />
     )
   });
 

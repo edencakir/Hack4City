@@ -18,7 +18,7 @@ export default class BusStop extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.title,
     tabBarIcon: ({ tintColor }) => (
-      <TabBarIcon name={'bus'} size={20} style={{}} color={tintColor} />
+      <TabBarIcon name={'route'} size={20} style={{}} color={tintColor} />
     )
   });
 
@@ -46,6 +46,7 @@ export default class BusStop extends Component {
       enablePoweredByContainer={false}
       styles={{
         textInputContainer: {
+          marginHorizontal: 2,
           backgroundColor: '#ececec',
           borderTopWidth: 0,
           borderBottomWidth: 0
