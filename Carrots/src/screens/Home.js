@@ -1,18 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
   Text,
   View,
   ScrollView,
   DeviceEventEmitter,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator,
+  Animated,
+  Dimensions
 } from 'react-native';
 import Beacons from 'react-native-beacons-manager';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -24,13 +20,25 @@ export default class Home extends Component {
 
   state = {
     scanning: false,
-    devices: []
+    status: 'Durağa Geldim'
+    //top: new Animated.Value(Dimensions.get('window').height / 2 - 150)
   };
 
   componentDidMount() {}
 
   scanBeacons = () => {
-    this.setState({ scanning: true });
+    this.setState({ scanning: true, status: 'Durak Aranıyor' });
+    setTimeout(() => {
+      this.setState({
+        scanning: false
+      });
+      this.props.navigation.navigate('BusStop', {
+        title: 'Bostanlı'
+      });
+    }, 1000);
+    //Animated.timing(this.state.top, {
+    //  toValue: 20
+    //}).start();
     // Define a region which can be identifier + uuid,
     // identifier + uuid + major or identifier + uuid + major + minor
     // (minor and major properties are numbers)
@@ -56,6 +64,10 @@ export default class Home extends Component {
 
   onBeaconRange = data => {
     console.log(data);
+    this.setState({
+      scanning: false,
+      status: 'Durağa Geldim'
+    });
     // data.region - The current region
     // data.region.identifier
     // data.region.uuid
@@ -73,22 +85,30 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{ margin: 16, fontSize: 24, fontFamily: 'HelveticaNeue' }}>
-          Durağa Geldim
-        </Text>
-        <TouchableOpacity
-          onPress={this.s}
-          style={{
-            width: 160,
-            height: 160,
-            borderRadius: 80,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'lightblue'
-          }}
-        >
-          <Icon name={'md-pin'} size={54} color={'orange'} />
-        </TouchableOpacity>
+        <Animated.View style={{ alignItems: 'center', top: -20 }}>
+          <Text
+            style={{ margin: 16, fontSize: 24, fontFamily: 'HelveticaNeue' }}
+          >
+            {this.state.status}
+          </Text>
+          <TouchableOpacity
+            onPress={this.scanBeacons}
+            style={{
+              width: 160,
+              height: 160,
+              borderRadius: 80,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'lightblue'
+            }}
+          >
+            {this.state.scanning ? (
+              <ActivityIndicator color={'white'} size={'large'} />
+            ) : (
+              <Icon name={'md-pin'} size={54} color={'orange'} />
+            )}
+          </TouchableOpacity>
+        </Animated.View>
       </View>
     );
   }
@@ -97,8 +117,7 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
+    justifyContent: 'center'
   }
 });
