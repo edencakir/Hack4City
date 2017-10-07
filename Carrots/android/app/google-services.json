@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "645154671777",
+    "firebase_url": "https://carrots-51a5b.firebaseio.com",
+    "project_id": "carrots-51a5b",
+    "storage_bucket": "carrots-51a5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645154671777:android:4b4d8022b7129ddb",
+        "android_client_info": {
+          "package_name": "com.carrots"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "645154671777-rvl4kivdou6hj6h890jkct99s9kaoghs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU_zsg_7rwr0RSoPdXxEQDjUo2TfaT0ok"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

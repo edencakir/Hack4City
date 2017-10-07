@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        html {
+            height: 100%
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0
+        }
+
+        #map-canvas {
+            height: 100%
+        }
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdoqP3R3iuebZi9SfiQu313MeacdyRtsk&sensor=false">
+
+    </script>
+    <script type="text/javascript">
+     var izbanNumberOfPeople = 0;
+     var metroNumberOfPeople = 3;
+     var map;
+
+     function placeMarker(marker, map) {
+        marker.setMap(map);
+     }
+
+     function initialize() {
+       var mapOptions = {
+         center: new google.maps.LatLng(38.4343856, 27.1256687),
+         zoom: 10
+       };
+       map = new google.maps.Map(document.getElementById("map-canvas"),
+           mapOptions);
+
+       var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(38.4350402, 27.1685797),
+        icon: 'https://mt.googleapis.com/vt/icon/name=icons/onion/25-bus.png',
+        map: map
+       });
+
+       var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(38.4649109, 27.2285737),
+        icon: 'https://mt.googleapis.com/vt/icon/name=icons/onion/25-bus.png',
+        map: map
+       });
+
+       var polys = new google.maps.Polyline({
+        map: map,
+        strokeColor: "#5555FF"
+       });
+
+       myCoord = [
+                        new google.maps.LatLng(38.4350402, 27.1685797),
+                        new google.maps.LatLng(38.4480711, 27.1900879),
+                        new google.maps.LatLng(38.459619, 27.2288526),
+                        new google.maps.LatLng(38.4649109, 27.2285737)
+        ];
+
+        var izbanMarker = new google.maps.Marker({
+               position: new google.maps.LatLng(38.4921168, 27.0631309),
+               map: map,
+               draggable: false,
+               icon: 'https://erail.in/images/icons_m/Train.png'
+        });
+
+        var infoWindowIzban = new google.maps.InfoWindow({
+               content: izbanNumberOfPeople < 2 ? "İzban şu an kalabalık değil" : "İzban kalabalık."
+        });
+        infoWindowIzban.open(map, izbanMarker);
+
+        var metroMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(38.3967521, 27.0701278),
+            map: map,
+            draggable: false,
+            icon: 'https://www.metro.news/wp-content/themes/metro-news/assets/favicons/favicon-32x32.png'
+        });
+
+        var infoWindowMetro = new google.maps.InfoWindow({
+            content: metroNumberOfPeople < 2 ? "Metro kalabalık değil" : "Metro kalabalık."
+        });
+        infoWindowMetro.open(map, metroMarker);
+
+        var metroCoordinates = [
+                        new google.maps.LatLng(38.3967521, 27.0701278),
+                        new google.maps.LatLng(38.4163341, 27.1276162),
+                        new google.maps.LatLng(38.4268976, 27.1551539),
+                        new google.maps.LatLng(38.4350402, 27.1685797)
+        ];
+
+        var metroPolys = new google.maps.Polyline({
+            map: map,
+            strokeColor: "red"
+        });
+
+        var metroService = new google.maps.DirectionsService(),metroPolys,snap_path=[];
+        metroPolys.setMap(map);
+        for(var j=0;j<metroCoordinates.length-1;j++) {
+            metroService.route({origin: metroCoordinates[j],destination: metroCoordinates[j+1],travelMode: google.maps.DirectionsTravelMode.DRIVING},function(result, status) {                
+                if(status == google.maps.DirectionsStatus.OK) {                 
+                      snap_path = snap_path.concat(result.routes[0].overview_path);
+                      metroPolys.setPath(snap_path);
+                }
+            });
+        }
+
+
+        var service = new google.maps.DirectionsService(),polys,snap_path=[];
+        polys.setMap(map);
+
+        for(var j=0;j<myCoord.length-1;j++) {
+            service.route({origin: myCoord[j],destination: myCoord[j+1],travelMode: google.maps.DirectionsTravelMode.DRIVING},function(result, status) {                
+                if(status == google.maps.DirectionsStatus.OK) {                 
+                      snap_path = snap_path.concat(result.routes[0].overview_path);
+                      polys.setPath(snap_path);
+                }
+            });
+        }
+     }
+
+     google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+</head>
+<body>
+    <div id="map-canvas" />
+</body>
+</html>

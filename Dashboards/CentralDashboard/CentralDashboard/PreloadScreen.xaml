@@ -1,0 +1,19 @@
+﻿<Controls:MetroWindow x:Class="CentralDashboard.PreloadScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="İzmir Eshot" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
+        ShowIconOnTitleBar="True"
+        BorderThickness="2"
+        TitleCaps="False"
+        Background="White" Loaded="WindowLoaded"
+        GlowBrush="{DynamicResource AccentColorBrush}">
+
+    <Grid Name="Grid" Focusable="True" ShowGridLines="False">
+        <Image Source="Logo.jpg" Margin="10,10,707,496" />
+        <TextBlock Text="Carrots ile 'gerçek' zaman." FontSize="39" FontFamily="Segoe UI Light" Margin="95,2,230,494" />
+        <cefSharp:ChromiumWebBrowser Grid.Row="0" Address="file://C:\\Users\\DeLL\\Desktop\\Hack4City\\Dashboards\\CentralDashboard\\CentralDashboard\\Maps.html" Margin="0,241,0,0" />
+    </Grid>
+</Controls:MetroWindow>
