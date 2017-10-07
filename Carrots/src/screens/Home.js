@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -26,17 +20,25 @@ export default class Home extends Component {
 
   state = {
     scanning: false,
-    status: 'Durağa Geldim',
-    top: new Animated.Value(Dimensions.get('window').height / 2 - 150)
+    status: 'Durağa Geldim'
+    //top: new Animated.Value(Dimensions.get('window').height / 2 - 150)
   };
 
   componentDidMount() {}
 
   scanBeacons = () => {
     this.setState({ scanning: true, status: 'Durak Aranıyor' });
-    Animated.timing(this.state.top, {
-      toValue: 20
-    }).start();
+    setTimeout(() => {
+      this.setState({
+        scanning: false
+      });
+      this.props.navigation.navigate('BusStop', {
+        title: 'Bostanlı'
+      });
+    }, 1000);
+    //Animated.timing(this.state.top, {
+    //  toValue: 20
+    //}).start();
     // Define a region which can be identifier + uuid,
     // identifier + uuid + major or identifier + uuid + major + minor
     // (minor and major properties are numbers)
@@ -83,7 +85,7 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Animated.View style={{ top: this.state.top, alignItems: 'center' }}>
+        <Animated.View style={{ alignItems: 'center', top: -20 }}>
           <Text
             style={{ margin: 16, fontSize: 24, fontFamily: 'HelveticaNeue' }}
           >
@@ -115,6 +117,7 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
+    justifyContent: 'center'
   }
 });
