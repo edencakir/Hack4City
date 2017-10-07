@@ -153,36 +153,43 @@ class BusStop extends Component {
     return <Image source={busStop} style={styles.stopImage} />;
   };
 
-  renderDestination = () => {
-    return this.routes.map((route, index) => (
-      <View style={{}} key={index}>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() =>
-            this.props.navigation.navigate('VehicleStatus', {
-              vehicleStatusTitle: route.title
-            })}
-          style={styles.buttonTransit}>
-          <Icon name={route.iconName} color={'grey'} size={28} />
-          <View style={{ marginLeft: 12, marginRight: 8, flex: 1 }}>
-            <Text style={styles.textTransit}>{route.title}</Text>
-            <Text style={styles.descriptionTransit}>{route.description}</Text>
-          </View>
-          <DirectionIcon name={'ios-arrow-forward'} color={'grey'} size={28} />
-        </TouchableOpacity>
-        {this.routes.length - 1 === index ? (
-          <View />
-        ) : (
-          <View
-            style={{
-              backgroundColor: 'lightgrey',
-              height: StyleSheet.hairlineWidth
-            }}
-          />
-        )}
-      </View>
-    ));
-  };
+  renderDestination = () => (
+    <ScrollView>
+      {this.routes.map((route, index) => (
+        <View style={{}} key={index}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() =>
+              this.props.navigation.navigate('VehicleStatus', {
+                vehicleStatusTitle: route.title
+              })}
+            style={styles.buttonTransit}
+          >
+            <Icon name={route.iconName} color={'grey'} size={28} />
+            <View style={{ marginLeft: 12, marginRight: 8, flex: 1 }}>
+              <Text style={styles.textTransit}>{route.title}</Text>
+              <Text style={styles.descriptionTransit}>{route.description}</Text>
+            </View>
+            <DirectionIcon
+              name={'ios-arrow-forward'}
+              color={'grey'}
+              size={28}
+            />
+          </TouchableOpacity>
+          {this.routes.length - 1 === index ? (
+            <View />
+          ) : (
+            <View
+              style={{
+                backgroundColor: 'lightgrey',
+                height: StyleSheet.hairlineWidth
+              }}
+            />
+          )}
+        </View>
+      ))}
+    </ScrollView>
+  );
 
   render() {
     const { locationSelected } = this.state;

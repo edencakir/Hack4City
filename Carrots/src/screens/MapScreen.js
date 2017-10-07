@@ -43,6 +43,13 @@ export const decode = function(t, e) {
   return (d = d.map(function(t) {
     return { latitude: t[0], longitude: t[1] };
   }));
+
+const getRouteURL = (org, dest) => {
+  const mode = 'driving'; // 'walking';
+  const origin = '38.457952,27.0890082';
+  const destination = '38.4541002,27.1991632';
+  return `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${GOOGLE_MAPS_API_KEY}&mode=${mode}`;
+
 };
 
 class MapScreen extends Component {
@@ -106,13 +113,17 @@ class MapScreen extends Component {
   render() {
     return (
       <MapView
+
         style={styles.map}
         region={this.state.region}
+
+        
         initialRegion={{
           latitude: 38.457952,
           longitude: 27.0890082,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
+
         }}>
         <MapView.Polyline
           coordinates={this.state.route}
@@ -130,6 +141,15 @@ class MapScreen extends Component {
           strokeColor={'green'}
         />
       </MapView>
+
+        }}
+        region={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.0121
+        }}
+      />
     );
   }
 }

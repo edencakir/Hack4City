@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import Home from './screens/Home';
 import MapScreen from './screens/MapScreen';
 import BusStop from './screens/BusStop';
@@ -31,14 +32,27 @@ const MainScreenNavigator = TabNavigator(
     SecondTab: { screen: SecondTab }
   },
   {
+    tabBarPosition: 'bottom',
     tabBarOptions: {
+      tabStyle: {
+        backgroundColor: '#ececec',
+        flexDirection: 'row'
+      },
+      style: {
+        backgroundColor: 'white'
+      },
+      indicatorStyle: {
+        backgroundColor: 'white'
+      },
+      upperCaseLabel: false,
       activeBackgroundColor: 'white',
       inactiveBackgroundColor: '#ececec',
       activeTintColor: 'orange',
       inactiveTintColor: 'grey',
       showIcon: true,
       labelStyle: {
-        fontSize: 14
+        fontSize: 14,
+        fontWeight: Platform.select({ ios: 'normal', android: 'bold' })
       },
       iconStyle: { marginTop: 1 }
     }
