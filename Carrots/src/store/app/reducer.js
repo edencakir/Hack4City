@@ -4,7 +4,7 @@ const initialState = {};
 
 export default (appReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.GET_LOCATION:
+    case types.GET_DESTINATION:
       return {
         ...state,
         destination: action.destination
