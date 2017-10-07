@@ -10,6 +10,15 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TabBarIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MapView from 'react-native-maps';
+import { GOOGLE_MAPS_API_KEY } from '../assets/Constants';
+
+export const getRouteURL = (org, dest) => {
+  const mode = 'driving'; // 'walking';
+  const origin = '38.457952,27.0890082';
+  const destination = '38.4541002,27.1991632';
+  return `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${GOOGLE_MAPS_API_KEY}&mode=${mode}`;
+};
 
 export default class MapScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -19,13 +28,40 @@ export default class MapScreen extends Component {
     )
   });
 
-  state = {};
+  state = {
+    region: {
+      latitude: 37.78825,
+      longitude: -122.4324,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421
+    }
+  };
+
+  getInitialState() {
+    return {
+      region: {
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+      }
+    };
+  }
+
+  onRegionChange(region) {
+    this.setState({ region });
+  }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>MapScreen</Text>
-      </View>
+      <MapView
+        initialRegion={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421
+        }}
+      />
     );
   }
 }
