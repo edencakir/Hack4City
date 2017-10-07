@@ -2,7 +2,7 @@ import React from 'react';
 import Home from './screens/Home';
 import MapScreen from './screens/MapScreen';
 import BusStop from './screens/BusStop';
-
+import VehicleStatus from './screens/VehicleStatus';
 import {
   StackNavigator,
   TabNavigator,
@@ -12,6 +12,9 @@ import {
 const FirstTab = StackNavigator({
   Bus: {
     screen: BusStop
+  },
+  VehicleStatus: {
+    screen: VehicleStatus
   }
 });
 
@@ -33,7 +36,11 @@ const MainScreenNavigator = TabNavigator(
       inactiveBackgroundColor: '#ececec',
       activeTintColor: 'orange',
       inactiveTintColor: 'grey',
-      showIcon: true
+      showIcon: true,
+      labelStyle: {
+        fontSize: 14
+      },
+      iconStyle: { marginTop: 1 }
     }
   }
 );

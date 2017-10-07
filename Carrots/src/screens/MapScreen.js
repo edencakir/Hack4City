@@ -20,7 +20,7 @@ export const getRouteURL = (org, dest) => {
   return `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${GOOGLE_MAPS_API_KEY}&mode=${mode}`;
 };
 
-export default class MetroStop extends Component {
+export default class MapScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Harita',
     tabBarIcon: ({ tintColor }) => (

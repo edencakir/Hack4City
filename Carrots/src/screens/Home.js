@@ -36,7 +36,7 @@ export default class Home extends Component {
       this.props.navigation.navigate('TabBar', {
         title: 'Bostanlı'
       });
-    }, 1000);
+    }, 100);
     //Animated.timing(this.state.top, {
     //  toValue: 20
     //}).start();
