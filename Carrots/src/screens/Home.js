@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import Beacons from 'react-native-beacons-manager';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Constants from '../utility/Constants';
+import { BASE_URL } from '../utility/Constants';
 
 export default class Home extends Component {
   static navigationOptions = {
@@ -92,10 +92,10 @@ export default class Home extends Component {
         var headers = new Headers();
         headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/json');
-        fetch(Constants.BASE_URL + '/api/durak', {
+        fetch(BASE_URL + '/api/durak', {
           method: 'POST',
           headers,
-          body: JSON.stringify(this.body)
+          body: JSON.stringify({ name: 'enes' })
         })
           .then(response => response.json())
           .then(responseJson => {
