@@ -6,18 +6,16 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
-  Image,
   Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import TabBarIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import busStop from '../assets/img/busstop.jpg';
+import TabBarIcon from 'react-native-vector-icons/FontAwesome';
 
-export default class BusStop extends Component {
+export default class ShipStop extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.title,
     tabBarIcon: ({ tintColor }) => (
-      <TabBarIcon name={'bus'} size={22} style={{}} />
+      <TabBarIcon name={'ship'} size={22} style={{}} />
     )
   });
 
@@ -26,8 +24,7 @@ export default class BusStop extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image source={busStop} style={styles.stopImage} />
-        <Text />
+        <Text>ShipStop</Text>
       </View>
     );
   }
@@ -36,10 +33,5 @@ export default class BusStop extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  stopImage: {
-    width: Dimensions.get('window').width,
-    height: 200,
-    resizeMode: 'cover'
   }
 });
