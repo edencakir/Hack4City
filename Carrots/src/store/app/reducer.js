@@ -9,6 +9,12 @@ export default (appReducer = (state = initialState, action) => {
         ...state,
         destination: action.destination
       };
+    case types.SET_TRANSPORTATION:
+      return {
+        ...state,
+        transport: action.transport
+      };
+
     default:
       return state;
   }
