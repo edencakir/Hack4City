@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Animated,
-  Dimensions
+  Dimensions,
+  Platform
 } from 'react-native';
 import Beacons from 'react-native-beacons-manager';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -25,6 +26,22 @@ export default class Home extends Component {
   };
 
   componentDidMount() {}
+
+  componentWillUnmount() {
+    const region = {
+      identifier: 'iBeacon',
+      uuid: 'E20A39F4-73F5-4BC4-A12F-17D1AD07A961'
+    };
+    // stop ranging beacons:
+    Beacons.stopRangingBeaconsInRegion(region.identifier, region.uuid)
+      .then(() => console.log('Beacons ranging stopped succesfully'))
+      .catch(error =>
+        console.log(`Beacons ranging not stopped, error: ${error}`)
+      );
+
+    // remove ranging event we registered at componentDidMount
+    DeviceEventEmitter.removeListener('beaconsDidRange');
+  }
 
   scanBeacons = () => {
     this.setState({ scanning: true, status: 'Durak Aranıyor' });
@@ -49,12 +66,21 @@ export default class Home extends Component {
     };
 
     // Request for authorization while the app is open
-    Beacons.requestWhenInUseAuthorization();
 
-    Beacons.startMonitoringForRegion(region);
-    Beacons.startRangingBeaconsInRegion(region);
-
-    Beacons.startUpdatingLocation();
+    if (Platform.OS === 'ios') {
+      Beacons.requestWhenInUseAuthorization();
+      Beacons.startMonitoringForRegion(region);
+      Beacons.startRangingBeaconsInRegion(region);
+      Beacons.startUpdatingLocation();
+    } else {
+      Beacons.detectIBeacons();
+      // Range beacons inside the region
+      Beacons.startRangingBeaconsInRegion(region.identifier, region.uuid)
+        .then(() => console.log('Beacons ranging started succesfully'))
+        .catch(error =>
+          console.log(`Beacons ranging not started, error: ${error}`)
+        );
+    }
 
     // Listen for beacon changes
     const subscription = DeviceEventEmitter.addListener(
@@ -69,6 +95,13 @@ export default class Home extends Component {
       scanning: false,
       status: 'Durağa Geldim'
     });
+    if (
+      (data.beacons && data.beacons[0] && data.beacons[0].uuid) ===
+        'e20a39f4-73f5-4bc4-a12f-17d1ad07a961' ||
+      data.uuid === 'e20a39f4-73f5-4bc4-a12f-17d1ad07a961'
+    ) {
+      // console.log('success');
+    }
     // data.region - The current region
     // data.region.identifier
     // data.region.uuid
@@ -87,11 +120,6 @@ export default class Home extends Component {
     return (
       <View style={styles.container}>
         <Animated.View style={{ alignItems: 'center', top: -20 }}>
-          <Text
-            style={{ margin: 16, fontSize: 24, fontFamily: 'HelveticaNeue' }}
-          >
-            {this.state.status}
-          </Text>
           <TouchableOpacity
             activeOpacity={1}
             onPress={this.scanBeacons}
@@ -119,7 +147,7 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#ececec',
     justifyContent: 'center'
   }
 });
