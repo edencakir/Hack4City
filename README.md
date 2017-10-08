@@ -1,4 +1,4 @@
-# Hack4City Team Carrots dev repo. [![Travis Build Status](https://travis-ci.com/edencakir/Hack4City.svg?token=WBPeUpiA2h1hB2CioaZp&branch=master)](https://travis-ci.com/edencakir/Hack4City.svg?token=WBPeUpiA2h1hB2CioaZp&branch=master)
+# Hack4City Team Carrots [![Travis Build Status](https://travis-ci.com/edencakir/Hack4City.svg?token=WBPeUpiA2h1hB2CioaZp&branch=master)](https://travis-ci.com/edencakir/Hack4City.svg?token=WBPeUpiA2h1hB2CioaZp&branch=master)
 :space_invader:
 [Rick and Morty final episode turkish sub](http://dizipub.com/rick-and-morty-3-sezon-10-bolum-sezon-finali/2)
 
@@ -28,15 +28,9 @@ Endpoint base URL: [http://54.163.77.75:8080](http://54.163.77.75:8080)
 
 
 ### /getDuraks
-Parametre olarak durak isimlerini alir ve secilen duraktaki kisi sayisini doner.
 
-###### Request
-```
-{
-    "token": "{{token}}",
-    "stationID": "0aB1cD2eF3g"
-}
-```
+Takes a station name as a parameter and then returns user count.
+
 
 ###### Response
 ```
@@ -50,15 +44,7 @@ Parametre olarak durak isimlerini alir ve secilen duraktaki kisi sayisini doner.
 ```
 
 ### /deleteAllDuraks
-Parametre olarak durak ismini alir ve secilen duragi siler.
-
-###### Request
-```
-{
-    "token": "{{token}}",
-    "stationID": "0aB1cD2eF3g"
-}
-```
+Takes a station name as a parameter and then deletes it.
 
 ###### Response
 ```
@@ -71,15 +57,7 @@ Parametre olarak durak ismini alir ve secilen duragi siler.
 ```
 
 ### /addDurak
-Parametre olarak durak ismini alir ve bu ismi duraklar listesine ekler. Ayni durak ismi eklendiginde mevcut olan durak bilgileri guncellenir.
-
-###### Request
-```
-{
-    "token": "{{token}}",
-    "stationID": "0aB1cD2eF3g"
-}
-```
+Takes a station name as a parameter and then adds it to the station list. Updates if increments user count.
 
 ###### Response
 ```
