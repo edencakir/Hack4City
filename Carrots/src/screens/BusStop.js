@@ -16,6 +16,38 @@ import { getDestination, setTransportation } from '../store/app/actions';
 import { connect } from 'react-redux';
 import busStop from '../assets/img/busstop.jpg';
 import konak from '../assets/img/konak.jpg';
+import { GOOGLE_MAPS_API_KEY } from '../utility/Constants';
+
+export const decode = function(t, e) {
+  for (
+    var n,
+      o,
+      u = 0,
+      l = 0,
+      r = 0,
+      d = [],
+      h = 0,
+      i = 0,
+      a = null,
+      c = Math.pow(10, e || 5);
+    u < t.length;
+
+  ) {
+    (a = null), (h = 0), (i = 0);
+    do (a = t.charCodeAt(u++) - 63), (i |= (31 & a) << h), (h += 5);
+    while (a >= 32);
+    (n = 1 & i ? ~(i >> 1) : i >> 1), (h = i = 0);
+    do (a = t.charCodeAt(u++) - 63), (i |= (31 & a) << h), (h += 5);
+    while (a >= 32);
+    (o = 1 & i ? ~(i >> 1) : i >> 1),
+      (l += n),
+      (r += o),
+      d.push([l / c, r / c]);
+  }
+  return (d = d.map(function(t) {
+    return { latitude: t[0], longitude: t[1] };
+  }));
+};
 
 class BusStop extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -75,10 +107,36 @@ class BusStop extends Component {
       }
     });
     navigation.setParams({ title: 'Bostanlı - Konak' });
-    getDestination({
-      lat: details.geometry.location.lat,
-      lng: details.geometry.location.lng
-    });
+    this.getRoute(details.geometry.location.lat, details.geometry.location.lng);
+  };
+
+  getRouteURL = (org, dest, status) => {
+    const mode = 'driving'; // 'walking';
+    const origin = '38.457952,27.0890082';
+    const destination = dest;
+    let url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${GOOGLE_MAPS_API_KEY}&mode=${mode}`;
+    return url;
+  };
+
+  getRoute = (lat, lng) => {
+    let dest = '' + lat + ',' + lng;
+    console.log(dest, 'destination');
+    let url = this.getRouteURL(null, dest, null);
+    console.log('url', url);
+    fetch(url)
+      .then(response => response.json())
+      .then(responseJson => {
+        if (responseJson.routes.length) {
+          this.props.getDestination({
+            lat,
+            lng,
+            path: decode(responseJson.routes[0].overview_polyline.points)
+          });
+        }
+      })
+      .catch(e => {
+        console.warn(e);
+      });
   };
 
   renderSearch = () => (
@@ -242,4 +300,11 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(null, { getDestination, setTransportation })(BusStop);
+const mapToState = ({ appReducer }) => ({
+  destination: appReducer.destination,
+  transport: appReducer.transport
+});
+
+export default connect(mapToState, { getDestination, setTransportation })(
+  BusStop
+);
