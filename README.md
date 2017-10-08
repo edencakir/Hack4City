@@ -42,10 +42,10 @@ Parametre olarak durak isimlerini alir ve secilen duraktaki kisi sayisini doner.
 ```
 {
    result: 'success',
-        response: {
-          message: 'Durak fetch success',
-          data: docs
-        }
+  response: {
+    message: 'Durak fetch success',
+    data: docs
+  }
 }
 ```
 
@@ -64,10 +64,9 @@ Parametre olarak durak ismini alir ve secilen duragi siler.
 ```
 {
     result: 'success',
-              response: {
-                message:
-                  'Cleared everything.'
-              }
+    response: {
+      message: 'Cleared everything.'
+    }
 }
 ```
 
@@ -86,9 +85,9 @@ Parametre olarak durak ismini alir ve bu ismi duraklar listesine ekler. Ayni dur
 ```
 {
       result: 'success',
-            response: {
-              message: 'Initial durak created, user set to 1.'
-            }
+      response: {
+        message: 'Initial durak created, user set to 1.'
+      }
 }
 ```
 
