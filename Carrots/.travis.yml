@@ -1,0 +1,68 @@
+language: objective-c
+
+osx_image: xcode8.3
+
+install:
+  - nvm install 7
+  - rm -Rf "${TMPDIR}/jest_preprocess_cache"
+  - brew install yarn --ignore-dependencies
+  - brew install watchman
+  - yarn install
+
+cache:
+  - yarn
+
+matrix:
+  - fast_finish: true # Fail the whole build as soon as one test type fails. Should help with Travis capacity issues (very long queues).
+
+branches:
+  only:
+    - master
+    - /^.*-stable$/
+
+notifications:
+  email:
+    on_success: always
+    on_failure: always
+
+
+# install:
+#   - nvm install 7
+#   - rm -Rf "${TMPDIR}/jest_preprocess_cache"
+#   - brew install yarn --ignore-dependencies
+#   - brew install watchman
+#   - yarn install
+
+# cache:
+#   - yarn
+
+# matrix:
+#   include:
+#     - language: android
+#       jdk: oraclejdk8
+#       sudo: required
+#       dist: precise
+#       before_cache:
+#         - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+#         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+#       android:
+#         components:
+#           - platform-tools
+#           - tools
+#           - build-tools-25.0.2
+#           - build-tools-26.0.1
+#           - android-25
+#           - android-26
+#           - build-tools-23.0.1
+#           - android-23
+#           - extra-android-m2repository
+#           - extra-google-google_play_services
+#           - extra-google-m2repository
+#       licenses:
+#         - android-sdk-preview-license-.+
+#         - android-sdk-license-.+
+#         - google-gdk-license-.+
+#       install:
+#         - yarn install
+#       script:
+#         - cd android && ./gradlew clean
