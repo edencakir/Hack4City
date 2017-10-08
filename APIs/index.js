@@ -57,26 +57,33 @@ app.get("/api/durak", function(req, res) {
 });
 
 app.post("/api/durak", function(req, res) {
-  var newContact = req.body;
-  newContact.createDate = new Date();
+  db.collection(DURAK_COLLECTION).find({}).toArray(function(err, docs) {
+	console.log(docs);
+	if(err) {
+	  handleError(res, err.message, "Failed to get contacts");
+	}
+	else if(docs.length == 0) {
+	  var newContact = req.body;
+	  newContact.createDate = new Date();
 
-  db.collection(DURAK_COLLECTION).insertOne(newContact, function(err, doc) {
-    if (err) {
-      handleError(res, err.message, "Failed to create new contact.");
-    } else {
-      res.status(201).json(doc.ops[0]);
-    }
+	  db.collection(DURAK_COLLECTION).insertOne(newContact, function(err, doc) {
+		if (err) {
+		  handleError(res, err.message, "Failed to create new contact.");
+		} else {
+		  res.status(201).json(doc.ops[0]);
+		}
+	  });
+	}
+	else {
+	  db.collection(DURAK_COLLECTION).update({id: 1}, {$inc: {kisi: parseInt(req.body.kisi)}});
+	  res.status(201).json({'OK': 'Added.'});
+	}
   });
 });
 
 app.delete("/api/durak/:id", function(req, res) {
-  db.collection(DURAK_COLLECTION).remove({id: parseInt(req.params.id)}, function(err, result) {
-    if (err) {
-      handleError(res, err.message, "Failed to delete contact");
-    } else {
-      res.status(200).json(req.params.id);
-    }
-  });
+  db.collection(DURAK_COLLECTION).update({id: parseInt(req.params.id)}, {$inc: {kisi: -1}});
+  res.status(201).json({'OK': 'Added.'});
 });
 
 app.get("/api/metro", function(req, res) {
@@ -90,26 +97,32 @@ app.get("/api/metro", function(req, res) {
 });
 
 app.post("/api/metro", function(req, res) {
-  var newContact = req.body;
-  newContact.createDate = new Date();
+  db.collection(METRO_COLLECTION).find({}).toArray(function(err, docs) {
+	if(err) {
+	  handleError(res, err.message, "Failed to get contacts");
+	}
+	else if(docs.length == 0) {
+	  var newContact = req.body;
+	  newContact.createDate = new Date();
 
-  db.collection(METRO_COLLECTION).insertOne(newContact, function(err, doc) {
-    if (err) {
-      handleError(res, err.message, "Failed to create new contact.");
-    } else {
-      res.status(201).json(doc.ops[0]);
-    }
+	  db.collection(METRO_COLLECTION).insertOne(newContact, function(err, doc) {
+		if (err) {
+		  handleError(res, err.message, "Failed to create new contact.");
+		} else {
+		  res.status(201).json(doc.ops[0]);
+		}
+	  });
+	}
+	else {
+	  db.collection(METRO_COLLECTION).update({id: 1}, {$inc: {kisi: req.body.kisi}});
+	  res.status(201).json({'OK': 'Added.'});
+	}
   });
 });
 
 app.delete("/api/metro/:id", function(req, res) {
-  db.collection(METRO_COLLECTION).remove({id: parseInt(req.params.id)}, function(err, result) {
-    if (err) {
-      handleError(res, err.message, "Failed to delete contact");
-    } else {
-      res.status(200).json(req.params.id);
-    }
-  });
+  db.collection(METRO_COLLECTION).update({id: parseInt(req.params.id)}, {$inc: {kisi: -1}});
+  res.status(201).json({'OK': 'Added.'});
 });
 
 app.get("/api/izban", function(req, res) {
@@ -123,26 +136,30 @@ app.get("/api/izban", function(req, res) {
 });
 
 app.post("/api/izban", function(req, res) {
-  var newContact = req.body;
-  newContact.createDate = new Date();
+  db.collection(IZBAN_COLLECTION).find({}).toArray(function(err, docs) {
+	if(err) {
+	  handleError(res, err.message, "Failed to get contacts");
+	}
+	else if(docs.length == 0) {
+	  var newContact = req.body;
+	  newContact.createDate = new Date();
 
-  db.collection(IZBAN_COLLECTION).insertOne(newContact, function(err, doc) {
-    if (err) {
-      handleError(res, err.message, "Failed to create new contact.");
-    } else {
-      res.status(201).json(doc.ops[0]);
-    }
+	  db.collection(IZBAN_COLLECTION).insertOne(newContact, function(err, doc) {
+		if (err) {
+		  handleError(res, err.message, "Failed to create new contact.");
+		} else {
+		  res.status(201).json(doc.ops[0]);
+		}
+	  });
+	}
+	else {
+	  db.collection(IZBAN_COLLECTION).update({id: 1}, {$inc: {kisi: req.body.kisi}});
+	  res.status(201).json({'OK': 'Added.'});
+	}
   });
 });
 
 app.delete("/api/izban/:id", function(req, res) {
-  db.collection(IZBAN_COLLECTION).remove({id: parseInt(req.params.id)}, function(err, result) {
-    if (err) {
-      handleError(res, err.message, "Failed to delete contact");
-    } else {
-      res.status(200).json(req.params.id);
-    }
-  });
+  db.collection(IZBAN_COLLECTION).update({id: parseInt(req.params.id)}, {$inc: {kisi: -1}});
+  res.status(201).json({'OK': 'Added.'});
 });
-
-

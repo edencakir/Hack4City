@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import Beacons from 'react-native-beacons-manager';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { BASE_URL } from '../utility/Constants';
 
 export default class Home extends Component {
   static navigationOptions = {
@@ -80,17 +81,32 @@ export default class Home extends Component {
 
   onBeaconRange = data => {
     console.log(data);
-    this.setState({
-      scanning: false
-    });
     if (
       (data.beacons && data.beacons[0] && data.beacons[0].uuid) ===
         'e20a39f4-73f5-4bc4-a12f-17d1ad07a961' ||
       data.uuid === 'e20a39f4-73f5-4bc4-a12f-17d1ad07a961'
     ) {
-      console.log('success');
-      this.processing = true;
-      this.setState;
+      console.log('found match.');
+      if (!this.processing) {
+        this.processing = true;
+        var headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-Type', 'application/json');
+
+        fetch(BASE_URL + '/api/durak', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ name: 'enes' })
+        })
+          .then(response => response.json())
+          .then(responseJson => {
+            console.log('success', responseJson);
+            this.processing = false;
+            this.props.navigation.navigate('TabBar', {
+              title: 'Bostanlı'
+            });
+          });
+      }
     }
     // data.region - The current region
     // data.region.identifier
