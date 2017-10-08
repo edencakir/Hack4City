@@ -87,7 +87,8 @@ export default class Home extends Component {
         data.beacons[0].uuid &&
         data.beacons[0].uuid.toLowerCase()) ===
         'e20a39f4-73f5-4bc4-a12f-17d1ad07a961' ||
-      data.uuid.toLowerCase() === 'e20a39f4-73f5-4bc4-a12f-17d1ad07a961'
+      (data.uuid &&
+        data.uuid.toLowerCase() === 'e20a39f4-73f5-4bc4-a12f-17d1ad07a961')
     ) {
       console.log('found match.');
       if (!this.processing) {

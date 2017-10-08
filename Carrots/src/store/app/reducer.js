@@ -5,7 +5,8 @@ const initialState = {
     lat: 38.457952,
     lng: 27.0890082,
     latitudeDelta: 0.1022,
-    longitudeDelta: 0.0421
+    longitudeDelta: 0.0421,
+    path: []
   }
 };
 
@@ -14,7 +15,8 @@ export default (appReducer = (state = initialState, action) => {
     case types.GET_DESTINATION:
       return {
         ...state,
-        destination: action.destination
+        destination: action.destination,
+        path: action.path
       };
     case types.SET_TRANSPORTATION:
       return {
