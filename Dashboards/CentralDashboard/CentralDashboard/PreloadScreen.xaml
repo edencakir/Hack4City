@@ -14,6 +14,12 @@
     <Grid Name="Grid" Focusable="True" ShowGridLines="False">
         <Image Source="Logo.jpg" Margin="10,10,707,496" />
         <TextBlock Text="Carrots ile 'gerçek' zaman." FontSize="39" FontFamily="Segoe UI Light" Margin="95,2,230,494" />
+        <TextBlock Text="Metro" FontSize="32" FontFamily="Segoe UI Light" Margin="19,78,658,439" />
+        <TextBlock Name="MetroNumber" FontSize="29" FontFamily="Segoe UI Light" Margin="19,114,658,403" />
+        <TextBlock Text="İzban" FontSize="32" FontFamily="Segoe UI Light" Margin="322,76,355,441" />
+        <TextBlock Name="IzbanNumber" FontSize="29" FontFamily="Segoe UI Light" Margin="322,114,355,403" />
+        <TextBlock Text="Durak" FontSize="32" FontFamily="Segoe UI Light" Margin="692,74,12,443" />
+        <TextBlock Name="DurakNumber" FontSize="29" FontFamily="Segoe UI Light" Margin="692,114,12,403" />
         <cefSharp:ChromiumWebBrowser Grid.Row="0" Address="file://C:\\Users\\DeLL\\Desktop\\Hack4City\\Dashboards\\CentralDashboard\\CentralDashboard\\Maps.html" Margin="0,241,0,0" />
     </Grid>
 </Controls:MetroWindow>
