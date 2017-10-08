@@ -10,6 +10,10 @@ let config = require('./config');
 let bodyParser = require('body-parser');
 
 require('./src/models/durakModel');
+/* Add Izban duraks */
+require('./src/models/izbanModel');
+/* Add Metro duraks */
+require('./src/models/metroModel');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database);
@@ -20,6 +24,10 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 require('./src/routes/durakRoutes')(app);
+/* Add Izban duraks */
+require('./src/routes/izbanRoutes')(app);
+/* Add Metro duraks */
+require('./src/routes/metroRoutes')(app);
 
 app.listen(port);
 
