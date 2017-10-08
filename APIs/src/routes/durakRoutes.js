@@ -8,7 +8,7 @@ module.exports = app => {
 
   apiRoutes.post('/durak', durakController.addDurak);
   apiRoutes.get('/durak', durakController.getDuraks);
-  apiRoutes.get('/clearAll', durakController.clearAllDuraks);
+  apiRoutes.get('/clearAll', durakController.deleteAllDuraks);
 
   app.use('/api', apiRoutes);
 };
