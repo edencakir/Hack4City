@@ -39,7 +39,7 @@ export default class Home extends Component {
       );
 
     // remove ranging event we registered at componentDidMount
-    DeviceEventEmitter.removeListener('beaconsDidRange');
+    DeviceEventEmitter.removeListener('beaconsDidRange', this.onBeaconRange);
   }
 
   scanBeacons = () => {
@@ -82,9 +82,12 @@ export default class Home extends Component {
   onBeaconRange = data => {
     console.log(data);
     if (
-      (data.beacons && data.beacons[0] && data.beacons[0].uuid) ===
+      (data.beacons &&
+        data.beacons[0] &&
+        data.beacons[0].uuid &&
+        data.beacons[0].uuid.toLowerCase()) ===
         'e20a39f4-73f5-4bc4-a12f-17d1ad07a961' ||
-      data.uuid === 'e20a39f4-73f5-4bc4-a12f-17d1ad07a961'
+      data.uuid.toLowerCase() === 'e20a39f4-73f5-4bc4-a12f-17d1ad07a961'
     ) {
       console.log('found match.');
       if (!this.processing) {
@@ -102,13 +105,20 @@ export default class Home extends Component {
           .then(responseJson => {
             console.log('success', responseJson);
             this.processing = false;
-            DeviceEventEmitter.removeListener(
-              'beaconsDidRange',
-              this.onBeaconRange
+            this.setState(
+              {
+                scanning: false
+              },
+              () => {
+                DeviceEventEmitter.removeListener(
+                  'beaconsDidRange',
+                  this.onBeaconRange
+                );
+                this.props.navigation.navigate('TabBar', {
+                  title: 'Bostanlı'
+                });
+              }
             );
-            this.props.navigation.navigate('TabBar', {
-              title: 'Bostanlı'
-            });
           });
       }
     }
