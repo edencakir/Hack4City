@@ -23,3 +23,19 @@ Endpoint base URL: [http://54.163.77.75:8080](http://54.163.77.75:8080)
 - Install [react-native-debugger](https://github.com/jhen0409/react-native-debugger/releases)
 - Run `yarn debug`
 - Shake the device and tap `Debug JS Remotely`
+
+## Using API
+
+
+# /getDuraks
+
+Parametre olarak durak isimlerini alir ve secilen duraktaki kisi sayisini doner.
+
+# /deleteAllDuraks
+
+Parametre olarak durak ismini alir ve secilen duragi siler.
+
+# /addDurak
+Parametre olarak durak ismini alir ve bu ismi duraklar listesine ekler. Ayni durak ismi eklendiginde mevcut olan durak bilgileri guncellenir.
+
+
