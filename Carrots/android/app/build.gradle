@@ -95,7 +95,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         manifestPlaceholders = [onesignal_app_id: "af702648-65f0-4039-a062-6ff3070c82e1",

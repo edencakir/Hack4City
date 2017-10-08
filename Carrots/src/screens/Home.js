@@ -140,8 +140,7 @@ export default class Home extends Component {
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: 'lightblue'
-            }}
-          >
+            }}>
             {this.state.scanning ? (
               <ActivityIndicator color={'white'} size={'large'} />
             ) : (

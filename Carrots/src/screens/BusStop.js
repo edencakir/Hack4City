@@ -12,7 +12,7 @@ import {
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DirectionIcon from 'react-native-vector-icons/Ionicons';
-import { getDestination } from '../store/app/actions';
+import { getDestination, setTransportation } from '../store/app/actions';
 import { connect } from 'react-redux';
 import busStop from '../assets/img/busstop.jpg';
 import konak from '../assets/img/konak.jpg';
@@ -35,21 +35,24 @@ class BusStop extends Component {
       title: 'Otobüs',
       color: 'blue',
       target: 'bus',
-      description: 'Sizin için en hızlı ulaşım yolu ancak vasıta kalabalık.'
+      description: 'Sizin için en hızlı ulaşım yolu ancak vasıta kalabalık.',
+      type: 'driving'
     },
     {
       iconName: 'tram',
       title: 'Tramvay',
       color: 'orange',
       target: 'tram',
-      description: 'Yavaş ve sarsıntısız bir yolculuk.'
+      description: 'Yavaş ve sarsıntısız bir yolculuk.',
+      type: 'transit'
     },
     {
       iconName: 'bike',
       title: 'Bisiklet',
       color: 'green',
       target: 'bike',
-      description: 'Sağlıklı yaşam!'
+      description: 'Sağlıklı yaşam!',
+      type: 'bicycling'
     },
     {
       iconName: 'train',
@@ -57,7 +60,8 @@ class BusStop extends Component {
       color: 'red',
       target: 'train',
       description:
-        'İstasyona gidişiniz 15 dakika, vardığınızda tren çok geçmeden gelmiş olacak.'
+        'İstasyona gidişiniz 15 dakika, vardığınızda tren çok geçmeden gelmiş olacak.',
+      type: 'walking'
     }
   ];
 
@@ -128,6 +132,12 @@ class BusStop extends Component {
     />
   );
 
+  selectTransportation = route => {
+    this.props.navigation.navigate('VehicleStatus', {
+      vehicleStatusTitle: route.title
+    });
+  };
+
   renderImages = () => {
     const { locationSelected } = this.state;
     if (locationSelected) {
@@ -159,12 +169,8 @@ class BusStop extends Component {
         <View style={{}} key={index}>
           <TouchableOpacity
             activeOpacity={1}
-            onPress={() =>
-              this.props.navigation.navigate('VehicleStatus', {
-                vehicleStatusTitle: route.title
-              })}
-            style={styles.buttonTransit}
-          >
+            onPress={() => this.selectTransportation(route)}
+            style={styles.buttonTransit}>
             <Icon name={route.iconName} color={'grey'} size={28} />
             <View style={{ marginLeft: 12, marginRight: 8, flex: 1 }}>
               <Text style={styles.textTransit}>{route.title}</Text>
@@ -236,4 +242,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(null, { getDestination })(BusStop);
+export default connect(null, { getDestination, setTransportation })(BusStop);
