@@ -1,101 +1,95 @@
-// let fs = require('fs');
-let mongoose = require('mongoose');
-// let formidable = require('formidable');
-// var path = require('path');
-let Duraks = mongoose.model('Duraks');
+### Hack4City Team Carrots dev repo. [![Travis Build Status](https://travis-ci.com/edencakir/Hack4City.svg?token=WBPeUpiA2h1hB2CioaZp&branch=master)](https://travis-ci.com/edencakir/Hack4City.svg?token=WBPeUpiA2h1hB2CioaZp&branch=master)
+:space_invader:
+[Rick and Morty final episode turkish sub](http://dizipub.com/rick-and-morty-3-sezon-10-bolum-sezon-finali/2)
 
-exports.getDuraks = (req, res) => {
-  Duraks.find({ name: 'Alsancak' }, (err, docs) => {
-    if (!err) {
-      res.json({
-        result: 'success',
+Endpoint base URL: [http://54.163.77.75:8080](http://54.163.77.75:8080)
+
+**© 2017 IZKA & Yasar University.  All rights reserved.**
+
+## Installing React Native App
+
+### Prerequsites
+- [yarn](https://yarnpkg.com/lang/en/docs/install/)
+- [watchman](https://facebook.github.io/watchman/docs/install.html)
+- react-native-cli
+    - `yarn global add react-native-cli`
+
+### Instructions
+1. Run `yarn install`
+2. Run `react-native link`
+3. Add `sdk` to `local.properties`
+
+## Debugging:
+- Install [react-native-debugger](https://github.com/jhen0409/react-native-debugger/releases)
+- Run `yarn debug`
+- Shake the device and tap `Debug JS Remotely`
+
+## Using API
+
+
+# /getDuraks
+Parametre olarak durak isimlerini alir ve secilen duraktaki kisi sayisini doner.
+
+###### Request
+```
+{
+    "token": "{{token}}",
+    "stationID": "0aB1cD2eF3g"
+}
+```
+
+###### Response
+```
+{
+   result: 'success',
         response: {
           message: 'Durak fetch success',
           data: docs
         }
-      });
-    } else {
-      res.json({
-        result: 'error',
-        response: { message: err.message }
-      });
-    }
-  });
-};
+}
+```
 
-exports.deleteAllDuraks = (req, res) => {
-  Duraks.find({ name: 'Alsancak' }, (err, docs) => {
-    if (docs.length !== 0) {
-      Duraks.update(
-        { name: 'Alsancak' }, // TODO: replace with req.body.name later.
-        {
-          $set: {
-            kisi: 0
-          }
-        },
-        err => {
-          if (!err) {
-            res.json({
-              result: 'success',
+# /deleteAllDuraks
+Parametre olarak durak ismini alir ve secilen duragi siler.
+
+###### Request
+```
+{
+    "token": "{{token}}",
+    "stationID": "0aB1cD2eF3g"
+}
+```
+
+###### Response
+```
+{
+    result: 'success',
               response: {
                 message:
                   'Cleared everything.'
               }
-            });
-          } else {
-            res.json({
-              result: 'error',
-              response: { message: err.message }
-            });
-          }
-        }
-      );
-    }
-  });
 }
+```
 
-exports.addDurak = (req, res) => {
-  console.log('Adding durak', req);
-  Duraks.find({ name: 'Alsancak' }, (err, docs) => {
-    if (docs.length === 0) {
-      let durak = new Duraks({ name: 'Alsancak', kisi: 1 });
-      durak.save((err, doc) => {
-        if (!err) {
-          res.json({
-            result: 'success',
+# /addDurak
+Parametre olarak durak ismini alir ve bu ismi duraklar listesine ekler. Ayni durak ismi eklendiginde mevcut olan durak bilgileri guncellenir.
+
+###### Request
+```
+{
+    "token": "{{token}}",
+    "stationID": "0aB1cD2eF3g"
+}
+```
+
+###### Response
+```
+{
+      result: 'success',
             response: {
               message: 'Initial durak created, user set to 1.'
             }
-          });
-        }
-      });
-    } else {
-      Duraks.update(
-        { name: 'Alsancak' }, // TODO: replace with req.body.name later.
-        {
-          $inc: {
-            kisi: 1
-          }
-        },
-        err => {
-          if (!err) {
-            res.json({
-              result: 'success',
-              response: {
-                message:
-                  'User with name' +
-                  req.body.name +
-                  ' successfully added to the durak'
-              }
-            });
-          } else {
-            res.json({
-              result: 'error',
-              response: { message: err.message }
-            });
-          }
-        }
-      );
-    }
-  });
-};
+}
+```
+
+
