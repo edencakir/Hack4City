@@ -102,6 +102,7 @@ export default class Home extends Component {
           .then(responseJson => {
             console.log('success', responseJson);
             this.processing = false;
+            DeviceEventEmitter.removeListener('beaconsDidRange');
             this.props.navigation.navigate('TabBar', {
               title: 'Bostanlı'
             });
