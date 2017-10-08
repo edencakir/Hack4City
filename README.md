@@ -27,7 +27,7 @@ Endpoint base URL: [http://54.163.77.75:8080](http://54.163.77.75:8080)
 ## Using API
 
 
-# /getDuraks
+### /getDuraks
 Parametre olarak durak isimlerini alir ve secilen duraktaki kisi sayisini doner.
 
 ###### Request
@@ -42,14 +42,14 @@ Parametre olarak durak isimlerini alir ve secilen duraktaki kisi sayisini doner.
 ```
 {
    result: 'success',
-  response: {
-    message: 'Durak fetch success',
-    data: docs
-  }
+   response: {
+     message: 'Durak fetch success',
+     data: docs
+   }
 }
 ```
 
-# /deleteAllDuraks
+### /deleteAllDuraks
 Parametre olarak durak ismini alir ve secilen duragi siler.
 
 ###### Request
@@ -70,7 +70,7 @@ Parametre olarak durak ismini alir ve secilen duragi siler.
 }
 ```
 
-# /addDurak
+### /addDurak
 Parametre olarak durak ismini alir ve bu ismi duraklar listesine ekler. Ayni durak ismi eklendiginde mevcut olan durak bilgileri guncellenir.
 
 ###### Request
