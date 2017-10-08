@@ -794,7 +794,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 54Y4623T59;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1370,11 +1370,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Carrots/Carrots.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 54Y4623T59;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
@@ -1393,8 +1393,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rnapps.carrots;
 				PRODUCT_NAME = Carrots;
-				PROVISIONING_PROFILE = "c3b2975c-0464-46ef-9e83-7903b4774e69";
-				PROVISIONING_PROFILE_SPECIFIER = CarrotDist;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1405,10 +1405,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Carrots/Carrots.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 54Y4623T59;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
@@ -1427,8 +1427,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rnapps.carrots;
 				PRODUCT_NAME = Carrots;
-				PROVISIONING_PROFILE = "c3b2975c-0464-46ef-9e83-7903b4774e69";
-				PROVISIONING_PROFILE_SPECIFIER = CarrotDist;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

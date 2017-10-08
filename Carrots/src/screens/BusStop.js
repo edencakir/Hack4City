@@ -136,7 +136,6 @@ class BusStop extends Component {
     this.props.navigation.navigate('VehicleStatus', {
       vehicleStatusTitle: route.title
     });
-    this.props.setTransportation(route.type);
   };
 
   renderImages = () => {

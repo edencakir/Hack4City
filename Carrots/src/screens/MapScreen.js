@@ -88,7 +88,7 @@ class MapScreen extends Component {
     let dest =
       '' + this.props.destination.lat + ',' + this.props.destination.lng;
     console.log(dest, 'destination');
-    let url = this.getRouteURL(null, dest, this.props.transport.type);
+    let url = this.getRouteURL(null, dest, null);
     console.log('url', url);
     fetch(url)
       .then(response => response.json())
