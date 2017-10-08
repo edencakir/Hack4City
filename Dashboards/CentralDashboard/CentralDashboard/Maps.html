@@ -21,16 +21,17 @@
 
     </script>
     <script type="text/javascript">
-     var izbanNumberOfPeople = 0;
-     var metroNumberOfPeople = 3;
-     var map;
-
-     function placeMarker(marker, map) {
-        marker.setMap(map);
+     window.onload = function startPage() {
+        initialize();
      }
 
      function initialize() {
-       var mapOptions = {
+        var izbanNumberOfPeople = 0;
+        var metroNumberOfPeople = 0;
+        var infoWindowArray = [];
+        var map;
+
+         var mapOptions = {
          center: new google.maps.LatLng(38.4343856, 27.1256687),
          zoom: 10
        };
@@ -68,22 +69,12 @@
                icon: 'https://erail.in/images/icons_m/Train.png'
         });
 
-        var infoWindowIzban = new google.maps.InfoWindow({
-               content: izbanNumberOfPeople < 2 ? "İzban şu an kalabalık değil" : "İzban kalabalık."
-        });
-        infoWindowIzban.open(map, izbanMarker);
-
         var metroMarker = new google.maps.Marker({
             position: new google.maps.LatLng(38.3967521, 27.0701278),
             map: map,
             draggable: false,
             icon: 'https://www.metro.news/wp-content/themes/metro-news/assets/favicons/favicon-32x32.png'
         });
-
-        var infoWindowMetro = new google.maps.InfoWindow({
-            content: metroNumberOfPeople < 2 ? "Metro kalabalık değil" : "Metro kalabalık."
-        });
-        infoWindowMetro.open(map, metroMarker);
 
         var metroCoordinates = [
                         new google.maps.LatLng(38.3967521, 27.0701278),
@@ -120,9 +111,54 @@
                 }
             });
         }
+
+        window.setInterval(function () {
+            fetch('http://54.163.77.75:8080/api/metro', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(function(response) {
+                return response.json();
+            }).then(function(resJson) {
+                metroNumberOfPeople = resJson.response.data[0].kisi;
+            });
+
+            fetch('http://54.163.77.75:8080/api/izban', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(function(response) {
+                return response.json();
+            }).then(function(resJson) {
+                izbanNumberOfPeople = resJson.response.data[0].kisi;
+            });
+
+            for(var i=0; i<infoWindowArray.length; i++) {
+                infoWindowArray[i].close();
+            }
+
+            var infoWindowMetro = new google.maps.InfoWindow({
+                content: metroNumberOfPeople < 5 ? "Metro kalabalık değil" : "Metro kalabalık."
+            });
+
+            infoWindowArray.push(infoWindowMetro);
+            infoWindowMetro.open(map, metroMarker);
+
+            var infoWindowIzban = new google.maps.InfoWindow({
+               content: izbanNumberOfPeople < 5 ? "İzban şu an kalabalık değil" : "İzban kalabalık."
+            });
+
+            infoWindowArray.push(infoWindowIzban);
+            infoWindowIzban.open(map, izbanMarker);
+
+        }, 3000);
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
      }
 
-     google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 </head>
 <body>

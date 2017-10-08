@@ -36,7 +36,7 @@ namespace CentralDashboard
             iNumber.Text = "0";
 
             dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Interval = TimeSpan.FromSeconds(10);
+            dispatcherTimer.Interval = TimeSpan.FromSeconds(3);
             dispatcherTimer.Tick += TimerCallback;
             dispatcherTimer.Start();
             
@@ -51,8 +51,11 @@ namespace CentralDashboard
             if (dResponse.IsSuccessStatusCode && dResponse != null)
             {
                 var dString = dResponse.Content.ReadAsStringAsync().Result;
-                JArray s = JArray.Parse(dString);
-                dNumber.Text = (string)s[0]["kisi"];
+                JObject s = JObject.Parse(dString);
+                if(s["response"]["data"].ToString() != "[]")
+                {
+                    dNumber.Text = s["response"]["data"][0]["kisi"].ToString();
+                }
             }
 
             HttpClient iClient = new HttpClient();
@@ -62,8 +65,11 @@ namespace CentralDashboard
             if (iResponse.IsSuccessStatusCode && iResponse != null)
             {
                 var iString = iResponse.Content.ReadAsStringAsync().Result;
-                JArray i = JArray.Parse(iString);
-                iNumber.Text = (string)i[0]["kisi"];
+                JObject i = JObject.Parse(iString);
+                if(i["response"]["data"].ToString() != "[]")
+                {
+                    iNumber.Text = i["response"]["data"][0]["kisi"].ToString();
+                }
             }
 
             HttpClient mClient = new HttpClient();
@@ -73,8 +79,11 @@ namespace CentralDashboard
             if (mResponse.IsSuccessStatusCode && mResponse != null)
             {
                 var mString = mResponse.Content.ReadAsStringAsync().Result;
-                JArray x = JArray.Parse(mString);
-                mNumber.Text = (string)x[0]["kisi"];
+                JObject x = JObject.Parse(mString);
+                if(x["response"]["data"].ToString() != "[]")
+                {
+                    mNumber.Text = (string)x["response"]["data"][0]["kisi"].ToString();
+                }
             }
         }
 
