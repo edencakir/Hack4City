@@ -120,8 +120,7 @@ class MapScreen extends Component {
           longitude: 27.0890082,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
-        }}
-      >
+        }}>
         <MapView.Polyline
           coordinates={this.state.route}
           strokeWidth={4}
@@ -158,7 +157,8 @@ const styles = StyleSheet.create({
 });
 
 const mapToState = ({ appReducer }) => ({
-  destination: appReducer.destination
+  destination: appReducer.destination,
+  transport: appReducer.transport
 });
 
 export default connect(mapToState, null)(MapScreen);
