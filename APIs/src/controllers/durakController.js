@@ -23,6 +23,37 @@ exports.getDuraks = (req, res) => {
   });
 };
 
+exports.deleteAllDuraks = (req, res) => {
+  Duraks.find({ name: 'Alsancak' }, (err, docs) => {
+    if (docs.length !== 0) {
+      Duraks.update(
+        { name: 'Alsancak' }, // TODO: replace with req.body.name later.
+        {
+          $set: {
+            kisi: 0
+          }
+        },
+        err => {
+          if (!err) {
+            res.json({
+              result: 'success',
+              response: {
+                message:
+                  'Cleared everything.'
+              }
+            });
+          } else {
+            res.json({
+              result: 'error',
+              response: { message: err.message }
+            });
+          }
+        }
+      );
+    }
+  });
+}
+
 exports.addDurak = (req, res) => {
   console.log('Adding durak', req);
   Duraks.find({ name: 'Alsancak' }, (err, docs) => {
